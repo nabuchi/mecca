@@ -1,0 +1,46 @@
+var sys = require('sys'),
+http = require('http'),
+io = require('socket.io');
+//base64_encode = require('base64').encode,
+//base64_decode = require('base64').decode,
+//Buffer = require('buffer').Buffer,
+//fs = require('fs');
+
+var server = http.createServer(function (request, response) {
+    response.writeHead(200, {'Content-Type': 'text/html'});
+    response.end('');
+});
+server.listen(8080, 'localhost');
+
+var socket = io.listen(server);
+
+// operation to client which session is created
+console.log('qqq');
+socket.on('connection', function(client) {
+        /*
+    read.on('data', function(data){
+        var buf = new Buffer(data);
+        image_src += base64_encode(buf);
+    }).on('end', function() {
+        var msg = JSON.stringify({type:'image',src:image_src});
+        client.send(msg);
+    });
+    */
+    //alert('ccc');
+    console.log('222');
+    client.send('ppp');
+    //read.on('data', function(data){
+        //var 
+    //});
+
+    // message receive handler
+    client.on('message', function(message) {
+        console.log('333');
+        client.send(message);
+    });
+
+    // operation when disconnected
+    client.on('disconnect', function() {
+        //client.broadcast(client.sessionId + 'disconnected');
+    });
+});
