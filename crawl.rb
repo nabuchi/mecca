@@ -8,11 +8,11 @@ m.database_names.each{|name| puts name}
 
 db = m.db('mecca')
 
-db['products'].insert({
-    :name => '耳をすませば',
-    :place => ['聖蹟桜ヶ丘駅','東京都'],
-    :image => 'mimi.jpg'
-})
+#db['products'].insert({
+#    :name => '耳をすませば',
+#    :place => ['聖蹟桜ヶ丘駅','東京都'],
+#    :image => 'mimi.jpg'
+#})
 
 puts db['users'].count
 
