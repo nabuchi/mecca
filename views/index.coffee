@@ -1,5 +1,3 @@
-coffeescript ->
-
 body ->
     h1 'Mecca 〜舞台探訪支援サイト〜'
     div id: 'main', ->

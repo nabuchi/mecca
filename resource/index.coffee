@@ -3,7 +3,9 @@ window.addEvent('domready', ->
     socket.on('connect', ->
     )
     socket.on('searchresult', (data)->
-        div = new Element('div')
+        div = new Element('div', {html:
+            '<table><tr><td>img</td></tr><td>タイトル</tr></table>'
+        })
         p = new Element('p').appendText(data.name+':'+data.place)
         a = new Element('a', {href: 'product/'+data._id}).appendText('id')
         img = new Element('img', {src: 'image/'+data.image, style: 'height:100px'})

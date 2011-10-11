@@ -6,4 +6,6 @@ html ->
     meta content: "travel", name: "keywords"
     script src: "/js/mootools_1_3_2.js"
     script src: "/socket.io/socket.io.js"
+    link rel: 'stylesheet', href: '/css/common.css'
+    script src: src for src in @js
     @body

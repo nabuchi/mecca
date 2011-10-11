@@ -1,6 +1,8 @@
 express = require('express')
 app = express.createServer()
 io = require('socket.io').listen(app)
+
+## mongoose
 mongoose = require('mongoose')
 
 Schema = mongoose.Schema
@@ -13,37 +15,39 @@ ProductSchema = new Schema({
 mongoose.model('Product', ProductSchema)
 mongoose.connect('mongodb://localhost/mecca')
 Product = mongoose.model('Product')
-#product = new Product()
-#product.name = '耳をすませば'
-#product.place = ['聖蹟桜ヶ丘駅', '東京都']
-#product.save()
-#Product.find({name:/^耳を/}, (err, docs)->
-#    for data in docs
-#        do (data)->
-#            console.log(data)
-#)
 
-app.register '.coffee', require 'coffeekup'
-app.set 'views', __dirname + '/views'
-app.set 'view engine', 'coffee'
-
+## setting
 app.configure(->
-    app.use(express.static(__dirname + '/public'))
+    this.set 'views', __dirname + '/views'
+    this.set 'view engine', 'coffee'
+    this.register '.coffee', require 'coffeekup'
+
+    this.use(express.static(__dirname + '/public'))
+    this.use(require("stylus").middleware({
+        src: __dirname + "/public/css",
+        compress: true
+    }))
 )
 app.listen(8080)
 
+## sinatra
 app.get('/', (req, res)->
-    res.render 'index.coffee'
+    res.render 'index.coffee', {
+        js: ['/js/index.js']
+    }
 )
 app.get('/js/:name', (req, res)->
 )
 app.get('/product/:id', (req, res)->
-    res.render('product.coffee', locals: {id: req.params.id})
+    res.render 'product.coffee', {
+         id: req.params.id,
+         js: ['/js/product.js']
+    }
 )
 
+## socket.io
 io.sockets.on('connection', (socket)->
     socket.on('my other event', (data)->
-        #console.log(data)
     )
     socket.on('search', (query)->
         q = new RegExp("^"+query)
@@ -54,7 +58,6 @@ io.sockets.on('connection', (socket)->
         )
     )
     socket.on('getproduct', (id)->
-        console.log(id)
         Product.find({_id:id}, (err, docs)->
             socket.emit('product', docs[0])
         )
