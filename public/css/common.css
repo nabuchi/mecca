@@ -3,5 +3,29 @@
   padding: 0;
 }
 body {
-  background-color: #ff0;
+  background-color: #4682b4;
+}
+h1#logo {
+  text-align: center;
+  margin: auto;
+}
+div#search {
+  width: 50%;
+  text-align: center;
+  margin: auto;
+}
+p.title,
+p.place {
+  font-size: 30px;
+}
+div.item {
+  width: 90%;
+  margin: auto;
+  border: solid;
+  back-ground-color: #fff;
+}
+div#root {
+  width: 500px;
+  border: solid;
+  margin: auto;
 }
