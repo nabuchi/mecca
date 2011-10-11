@@ -2,11 +2,14 @@ window.addEvent('domready', ->
     makeitem = (data)->
         item = new Element('div', {class: 'item'})
         table = new Element('table')
-        img = new Element('img', {src: 'image/'+data.image, style: 'height:100px'})
-        td1 = new Element('td', {rowspan: 2}).grab(img)
+        a = new Element('a', {href: 'product/'+data._id})
+        img = new Element('img', {src: 'image/'+data.image, style: 'height:100px',href: 'product/'+data._id})
+        a.grab(img)
+        td1 = new Element('td', {rowspan: 2}).grab(a)
+        a1 = new Element('a', {href: 'product/'+data._id})
         p1 = new Element('p', {class: 'title'}).appendText(data.name)
         p2 = new Element('p', {class: 'place'}).appendText(data.place)
-        td2 = new Element('td').grab(p1)
+        td2 = new Element('td').grab(a1.grab(p1))
         td3 = new Element('td').grab(p2)
         tr1 = new Element('tr')
         tr2 = new Element('tr')
@@ -16,7 +19,7 @@ window.addEvent('domready', ->
         item.grab(table)
         table.grab(tr1)
         table.grab(tr2)
-        return item 
+        return item
     socket = io.connect(window.location.hostname)
     socket.on('connect', ->
     )

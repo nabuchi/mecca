@@ -2,25 +2,33 @@
   window.addEvent('domready', function() {
     var makeitem, socket;
     makeitem = function(data) {
-      var img, item, p1, p2, table, td1, td2, td3, tr1, tr2;
+      var a, a1, img, item, p1, p2, table, td1, td2, td3, tr1, tr2;
       item = new Element('div', {
         "class": 'item'
       });
       table = new Element('table');
+      a = new Element('a', {
+        href: 'product/' + data._id
+      });
       img = new Element('img', {
         src: 'image/' + data.image,
-        style: 'height:100px'
+        style: 'height:100px',
+        href: 'product/' + data._id
       });
+      a.grab(img);
       td1 = new Element('td', {
         rowspan: 2
-      }).grab(img);
+      }).grab(a);
+      a1 = new Element('a', {
+        href: 'product/' + data._id
+      });
       p1 = new Element('p', {
         "class": 'title'
       }).appendText(data.name);
       p2 = new Element('p', {
         "class": 'place'
       }).appendText(data.place);
-      td2 = new Element('td').grab(p1);
+      td2 = new Element('td').grab(a1.grab(p1));
       td3 = new Element('td').grab(p2);
       tr1 = new Element('tr');
       tr2 = new Element('tr');
